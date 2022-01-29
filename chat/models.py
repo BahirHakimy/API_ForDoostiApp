@@ -1,13 +1,14 @@
 from django.db import models
-from django.conf import settings
 from django.db.models.signals import post_delete
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 CHAT_TYPES = [("PR", "Private"), ("PB", "Public")]
 
 
 class Chat(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    members = models.ManyToManyField(User)
     chat_type = models.CharField(max_length=2, choices=CHAT_TYPES)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -37,11 +38,11 @@ class MessageManager(models.Manager):
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     attached_file = models.FileField(upload_to="files", null=True, blank=True)
     read_by = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name="viewed_users"
+        User, related_name="viewed_users"
     )
     timestamp = models.DateTimeField(auto_now_add=True)
 
