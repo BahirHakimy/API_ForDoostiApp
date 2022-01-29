@@ -1,6 +1,4 @@
-import base64
 import datetime
-from django.core.files.base import ContentFile
 from copy import Error
 from rest_framework import status
 from rest_framework.response import Response

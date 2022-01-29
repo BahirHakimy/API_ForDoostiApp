@@ -1,11 +1,9 @@
-from email import message
 import json
-from time import sleep
 from django.http.request import HttpRequest
 from chat.models import Chat, Message
 from .serializers import MessageSerializer
 from channels.generic.websocket import WebsocketConsumer
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model
 from asgiref.sync import async_to_sync
 from django.db.models import Count, Q
 
