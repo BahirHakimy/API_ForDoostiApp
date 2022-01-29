@@ -1,7 +1,7 @@
 import os
 import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dostiApi.development")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dostiApi.production")
 django.setup()
 import chat.routing
 from channels.routing import ProtocolTypeRouter, URLRouter

@@ -3,9 +3,7 @@ from datetime import timedelta
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "http://127.0.0.0.1:8000",
-]
+ALLOWED_HOSTS = ["http://127.0.0.0.1:8000", "https://dostiapi.herokuapp.com"]
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
