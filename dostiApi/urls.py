@@ -5,11 +5,9 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("dostiApi/", include("dosti.urls")),
     path("chat/", include("chat.urls")),
+    path("/", admin.site.urls),
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
