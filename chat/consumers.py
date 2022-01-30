@@ -84,7 +84,7 @@ class ChatConsumer(WebsocketConsumer):
         created_message.read_by.add(user)
         request = HttpRequest()
         request.build_absolute_uri = (
-            lambda location: f'http://{self.scope["headers"][0][1].decode()}{location}'
+            lambda location: f'https://{self.scope["headers"][0][1].decode()}{location}'
         )
         serializer = MessageSerializer(
             created_message, many=False, context={"request": request}
