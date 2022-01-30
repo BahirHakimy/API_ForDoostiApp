@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "channels",
     "whitenoise",
+    "github_storages",
     "dosti.apps.DostiConfig",
     "chat.apps.ChatConfig",
 ]
