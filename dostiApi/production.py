@@ -74,6 +74,7 @@ LOGGING = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8888",
+    "https://dostiapp.herokuapp.com",
 ]
 
 
