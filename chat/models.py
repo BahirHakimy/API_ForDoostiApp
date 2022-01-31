@@ -39,7 +39,9 @@ class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
-    attached_file = models.FileField(upload_to="files", null=True, blank=True)
+    attached_file = models.FileField(
+        upload_to="files", max_length=255, null=True, blank=True
+    )
     read_by = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="viewed_users"
     )
