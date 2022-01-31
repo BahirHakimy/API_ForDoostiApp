@@ -2802,3 +2802,5 @@ File C:\Users\Admin\Desktop\Dosti\Api\Production\chat\routing.py first seen with
 File C:\Users\Admin\AppData\Local\Programs\Python\Python39\Lib\site-packages\django\core\asgi.py first seen with mtime 1643439405.772892
 File C:\Users\Admin\AppData\Local\Programs\Python\Python39\Lib\site-packages\channels\generic\__init__.py first seen with mtime 1643439724.4902995
 File C:\Users\Admin\AppData\Local\Programs\Python\Python39\Lib\site-packages\django\contrib\sessions\backends\db.py first seen with mtime 1643439405.27387
+ALTER TABLE "dosti_userprofile" ALTER COLUMN "cover_photo" TYPE varchar(255); (params [])
+ALTER TABLE "dosti_userprofile" ALTER COLUMN "profile_pic" TYPE varchar(255); (params [])
