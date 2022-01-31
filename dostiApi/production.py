@@ -79,7 +79,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # For production
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
 GITHUB_HANDLE = os.environ.get("GITHUB_USERNAME")
 ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN")
