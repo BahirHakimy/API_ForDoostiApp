@@ -11,8 +11,12 @@ class UserProfile(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user"
     )
-    profile_pic = models.ImageField(upload_to="profilesPics", null=True, blank=True)
-    cover_photo = models.ImageField(upload_to="coverPhotos", null=True, blank=True)
+    profile_pic = models.ImageField(
+        upload_to="profilesPics", max_length=255, null=True, blank=True
+    )
+    cover_photo = models.ImageField(
+        upload_to="coverPhotos", max_length=255, null=True, blank=True
+    )
     gender = models.CharField(choices=GENDERS, default="NS", max_length=2)
     date_of_birth = models.DateField(blank=True, null=True)
     country = models.CharField(max_length=55, default="Add you Country")
