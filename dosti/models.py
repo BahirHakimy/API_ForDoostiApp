@@ -121,10 +121,10 @@ def createFriendShip(instance, created, **kwargs):
 def setDefaultProfilePic(instance, created, **kwargs):
     if created:
         if instance.gender == "F":
-            instance.profile_pic = "defaultFemale.png"
+            instance.profile_pic = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultFemale.png"
         else:
-            instance.profile_pic = "defaultMale.png"
-        instance.cover_photo = "defaultCover.jpg"
+            instance.profile_pic = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultMale.png"
+        instance.cover_photo = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultCover.jpg"
         instance.save()
 
 
