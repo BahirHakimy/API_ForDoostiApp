@@ -1,6 +1,8 @@
 import os
 import django
+from django.utils.encoding import force_str
 
+django.utils.encoding.force_text = force_str
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dostiApi.production")
 django.setup()
 import chat.routing
