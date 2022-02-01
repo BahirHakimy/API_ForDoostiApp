@@ -1,4 +1,7 @@
+import json
+import os
 import base64
+import requests
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import (
@@ -102,6 +105,18 @@ def personalInfoView(request):
     )
 
 
+def delete_file_from_github(file):
+    username = os.environ.get("GITHUB_USERNAME")
+    token = os.environ.get("GITHUB_ACCESS_TOKEN")
+    url = f"https://api.github.com/repos/BahirHakimy/file-storage-for-dostiapi/contents/media/{file}"
+    response = requests.get(url, auth=(username, token))
+    message = f"deleted file: {file}"
+    sha = json.loads(response.text)["sha"]
+    payload = {"sha": sha, "message": message}
+    req = requests.delete(url, auth=(username, token), params=payload)
+    print(f"Delete request status code: HTTP-{req.status_code}")
+
+
 @api_view(["POST"])
 @parser_classes([MultiPartParser, FormParser])
 def mediaUpdateView(request):
@@ -119,8 +134,10 @@ def mediaUpdateView(request):
                 f"{user.id}_{datetime.datetime.now()}profile.jpg",
             )
             if profile.profile_pic:
-                if not profile.profile_pic.name.startswith("default"):
-                    profile.profile_pic.delete(False)
+                if not profile.profile_pic.name.split("media/")[1].startswith(
+                    "default"
+                ):
+                    delete_file_from_github(profile.profile_pic.name.split("media/")[1])
             profile.profile_pic = photo
         elif imageType == "cover":
             photo = ContentFile(
@@ -128,7 +145,10 @@ def mediaUpdateView(request):
                 f"{user.id}_{datetime.datetime.now()}cover.jpg",
             )
             if profile.cover_photo:
-                profile.cover_photo.delete(False)
+                if not profile.cover_photo.name.split("media/")[1].startswith(
+                    "default"
+                ):
+                    delete_file_from_github(profile.cover_photo.name.split("media/")[1])
             profile.cover_photo = photo
         else:
             return Response(
@@ -300,7 +320,6 @@ def requestRetriveView(request):
 
 @api_view(["POST"])
 def friendsView(request):
-
     user = User.objects.get(username=request.data["username"])
     friends = Friendship.objects.get(user=user)
     serializer = FriendsSerializer(friends, context={"request": request})

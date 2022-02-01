@@ -51,22 +51,22 @@ SIMPLE_JWT = {
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-        "file": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": "log.django",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console", "file"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "DEBUG"),
-        },
-    },
+    # "handlers": {
+    #     "console": {
+    #         "class": "logging.StreamHandler",
+    #     },
+    #     "file": {
+    #         "level": "DEBUG",
+    #         "class": "logging.FileHandler",
+    #         "filename": "log.django",
+    #     },
+    # },
+    # "loggers": {
+    #     "django": {
+    #         "handlers": ["console", "file"],
+    #         "level": os.getenv("DJANGO_LOG_LEVEL", "DEBUG"),
+    #     },
+    # },
 }
 
 
