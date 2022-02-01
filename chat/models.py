@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_delete
 
+from dosti.views import delete_file_from_github
+
 CHAT_TYPES = [("PR", "Private"), ("PB", "Public")]
 
 
@@ -55,7 +57,7 @@ class Message(models.Model):
 
 def delete_related_file(instance, *args, **kwargs):
     if instance.attached_file:
-        instance.attached_file.delete(False)
+        delete_file_from_github(instance.attached_file.name.split("media/")[1])
 
 
 post_delete.connect(delete_related_file, sender=Message)
