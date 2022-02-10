@@ -111,10 +111,13 @@ def delete_file_from_github(file):
     url = f"https://api.github.com/repos/BahirHakimy/file-storage-for-dostiapi/contents/media/{file}"
     response = requests.get(url, auth=(username, token))
     message = f"deleted file: {file}"
-    sha = json.loads(response.text)["sha"]
-    payload = {"sha": sha, "message": message}
-    req = requests.delete(url, auth=(username, token), params=payload)
-    print(f"Delete request status code: HTTP-{req.status_code}")
+    try:
+        sha = json.loads(response.text)["sha"]
+        payload = {"sha": sha, "message": message}
+        req = requests.delete(url, auth=(username, token), params=payload)
+        print(f"Delete request status code: HTTP-{req.status_code}")
+    except KeyError:
+        print(f"File not found on github! status code: HTTP_{response.status_code}")
 
 
 @api_view(["POST"])
