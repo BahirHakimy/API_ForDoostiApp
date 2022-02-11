@@ -52,7 +52,7 @@ ROOT_URLCONF = "dostiApi.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -130,6 +130,9 @@ AUTHENTICATION_BACKENDS = [
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CSRF_TRUSTED_ORIGINS = ["https://dostiapi.herokuapp.com"]
