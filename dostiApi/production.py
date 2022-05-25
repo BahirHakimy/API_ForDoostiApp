@@ -12,6 +12,7 @@ ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN")
 GITHUB_REPO_NAME = os.environ.get("GITHUB_REPO_NAME")
 MEDIA_BUCKET_NAME = "media"
 CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ["https://dostiapi.herokuapp.com"]
 SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
