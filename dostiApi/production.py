@@ -1,6 +1,7 @@
 import os
 from .base import *
 from datetime import timedelta
+import channels_redis.core
 
 DEBUG = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -32,7 +33,9 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(os.environ.get("REDIS_HOSTNAME"), os.environ.get("REDIS_PORT"))],
+            "hosts": [
+                f"redis://:{os.environ.get('REDIS_PASSWORD')}@{os.environ.get('REDIS_HOSTNAME')}"
+            ],
         },
     },
 }
