@@ -24,6 +24,7 @@ from .serializers import (
 from .models import Friendship, UserProfile, FriendRequests
 from rest_framework.permissions import AllowAny
 from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 import datetime
 
 
@@ -87,8 +88,11 @@ def personalInfoView(request):
     profile = UserProfile.objects.get(user=user)
 
     if profile_pic:
-        image = ContentFile(base64.urlsafe_b64decode(profile_pic), f"{user.id}.jpg")
-        profile.profile_pic = image
+        if isinstance(profile_pic, InMemoryUploadedFile):
+            profile.profile_pic = profile_pic
+        else:
+            image = ContentFile(base64.urlsafe_b64decode(profile_pic), f"{user.id}.jpg")
+            profile.profile_pic = image
 
     serializer = UserCreateProfileSerializer(profile, data=request.data, many=False)
     if serializer.is_valid():
@@ -108,7 +112,7 @@ def personalInfoView(request):
 def delete_file_from_github(file):
     username = os.environ.get("GITHUB_USERNAME")
     token = os.environ.get("GITHUB_ACCESS_TOKEN")
-    url = f"https://api.github.com/repos/BahirHakimy/file-storage-for-dostiapi/contents/media/{file}"
+    url = os.environ.get("GITHUB_REPO_URL") + "/" + file
     response = requests.get(url, auth=(username, token))
     message = f"deleted file: {file}"
     try:

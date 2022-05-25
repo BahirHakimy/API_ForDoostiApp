@@ -1,5 +1,6 @@
 /.vscode 
 /static
+media/
 db.slite3
 resetData.py
 resetScript.py

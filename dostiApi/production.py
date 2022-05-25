@@ -3,16 +3,40 @@ from .base import *
 from datetime import timedelta
 
 DEBUG = False
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+# For storage
+DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
+GITHUB_HANDLE = os.environ.get("GITHUB_USERNAME")
+ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN")
+GITHUB_REPO_NAME = os.environ.get("GITHUB_REPO_NAME")
+MEDIA_BUCKET_NAME = "media"
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
     "http://127.0.0.0.1:8000",
     "dostiapi.herokuapp.com",
 ]
 
-ACCOUNT_EMAIL_VERIFICATION = "none"
+# Django cors headers
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8888",
+    "https://dostiapp.herokuapp.com",
+]
+
+# Channels Redis
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(os.environ.get("REDIS_HOSTNAME"), os.environ.get("REDIS_PORT"))],
+        },
+    },
+}
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -48,6 +72,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
+# To maintain loging in production
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -68,22 +93,3 @@ LOGGING = {
     #     },
     # },
 }
-
-
-# Django cors headers
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:8888",
-    "https://dostiapp.herokuapp.com",
-]
-
-
-# For production
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
-GITHUB_HANDLE = os.environ.get("GITHUB_USERNAME")
-ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN")
-GITHUB_REPO_NAME = os.environ.get("GITHUB_REPO_NAME")
-MEDIA_BUCKET_NAME = "media"
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
