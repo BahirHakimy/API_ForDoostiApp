@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -126,10 +125,19 @@ def createFriendShip(instance, created, **kwargs):
 def setDefaultProfilePic(instance, created, **kwargs):
     if created:
         if instance.gender == "F":
-            instance.profile_pic = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultFemale.png"
+            if settings.DEBUG:
+                instance.profile_pic = "defaultFemale.png"
+            else:
+                instance.profile_pic = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultFemale.png"
         else:
-            instance.profile_pic = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultMale.png"
-        instance.cover_photo = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultCover.jpg"
+            if settings.DEBUG:
+                instance.profile_pic = "defaultMale.png"
+            else:
+                instance.profile_pic = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultMale.png"
+        if settings.DEBUG:
+            instance.cover_photo = "defaultCover.jpg"
+        else:
+            instance.cover_photo = "https://raw.githubusercontent.com/BahirHakimy/file-storage-for-dostiapi/main/media/defaultCover.jpg"
         instance.save()
 
 
