@@ -3,6 +3,7 @@ from datetime import timedelta
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SECRET_KEY="bahirhakimy-dostiapi-securitykey-@5u\*az-1bo&z!g(b&x4!hqma81nyh#d5d&32l5^en8ljw@t!l"
 
 ALLOWED_HOSTS = ["*"]
 ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -19,7 +20,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Database
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
