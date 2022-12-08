@@ -12,19 +12,19 @@ ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN")
 GITHUB_REPO_NAME = os.environ.get("GITHUB_REPO_NAME")
 MEDIA_BUCKET_NAME = "media"
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ["https://dostiapi.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://doosti.onrender.com","https://doostiapp.onrender.com"]
 SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
     "http://127.0.0.0.1:8000",
-    "doosti.onrender.com",
+    "https://doosti.onrender.com",
 ]
 
 # Django cors headers
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8888",
-    "https://dostiapp.onrender.com",
+    "https://doostiapp.onrender.com",
 ]
 
 # Channels Redis
