@@ -18,6 +18,7 @@ SESSION_COOKIE_SECURE = True
 ALLOWED_HOSTS = [
     "http://127.0.0.0.1:8000",
     "https://doosti.onrender.com",
+    "doosti.onrender.com"
 ]
 
 # Django cors headers
