@@ -1,7 +1,6 @@
 import os
 from .base import *
 from datetime import timedelta
-import channels_redis.core
 
 DEBUG = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
